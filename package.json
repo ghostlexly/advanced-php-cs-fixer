@@ -1,0 +1,82 @@
+{
+  "name": "advanced-php-cs-fixer",
+  "displayName": "Advanced php-cs-fixer",
+  "description": "Display php-cs-fixer errors and warnings with introspection and format PHP files",
+  "version": "1.0.0",
+  "publisher": "ghostlexly",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Formatters",
+    "Linters"
+  ],
+  "activationEvents": [
+    "onLanguage:php"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "advancedPhpCsFixer.fix",
+        "title": "PHP CS Fixer: Fix Current File"
+      },
+      {
+        "command": "advancedPhpCsFixer.checkFile",
+        "title": "PHP CS Fixer: Check Current File"
+      }
+    ],
+    "configuration": {
+      "title": "Advanced php-cs-fixer",
+      "properties": {
+        "advancedPhpCsFixer.executablePath": {
+          "type": "string",
+          "default": "php-cs-fixer",
+          "description": "Path to php-cs-fixer executable"
+        },
+        "advancedPhpCsFixer.configPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to .php-cs-fixer.php config file (optional)"
+        },
+        "advancedPhpCsFixer.enableDiagnostics": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable diagnostics (error/warning display)"
+        },
+        "advancedPhpCsFixer.enableFormatting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable formatting on save or manual format"
+        },
+        "advancedPhpCsFixer.allowRisky": {
+          "type": "boolean",
+          "default": false,
+          "description": "Allow risky rules"
+        },
+        "advancedPhpCsFixer.rules": {
+          "type": "object",
+          "default": {},
+          "description": "Custom php-cs-fixer rules (overrides config file)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "vscode:package": "vsce package",
+    "vscode:publish": "vsce package && vsce publish",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.40.0",
+    "typescript": "^5.1.0"
+  }
+}
