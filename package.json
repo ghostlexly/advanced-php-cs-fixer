@@ -4,6 +4,8 @@
   "description": "Display php-cs-fixer errors and warnings with introspection and format PHP files",
   "version": "1.0.0",
   "publisher": "ghostlexly",
+  "repository": "https://github.com/ghostlexly/advanced-php-cs-fixer",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.80.0"
   },
