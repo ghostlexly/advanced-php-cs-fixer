@@ -2,7 +2,7 @@
   "name": "advanced-php-cs-fixer",
   "displayName": "Advanced php-cs-fixer",
   "description": "Display php-cs-fixer errors and warnings with introspection and format PHP files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "ghostlexly",
   "repository": "https://github.com/ghostlexly/advanced-php-cs-fixer",
   "icon": "icon.png",

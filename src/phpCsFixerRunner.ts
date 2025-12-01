@@ -1,6 +1,8 @@
 import * as vscode from "vscode";
 import { exec } from "child_process";
 import { promisify } from "util";
+import * as fs from "fs";
+import * as path from "path";
 
 const execAsync = promisify(exec);
 
@@ -41,8 +43,33 @@ export class PhpCsFixerRunner {
 
   private getConfigPath(): string {
     const configPath = this.config.get<string>("configPath", "");
+    const workspaceFolders = vscode.workspace.workspaceFolders;
 
-    return configPath;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+      return configPath;
+    }
+
+    const workspaceFolder = workspaceFolders[0].uri.fsPath;
+
+    if (configPath) {
+      return configPath.replace(/\$\{workspaceFolder\}/g, workspaceFolder);
+    }
+
+    const configFiles = [
+      ".php-cs-fixer.php",
+      ".php-cs-fixer.dist.php",
+      ".php-cs.php",
+      ".php-cs.dist.php",
+    ];
+
+    for (const configFile of configFiles) {
+      const fullPath = path.join(workspaceFolder, configFile);
+      if (fs.existsSync(fullPath)) {
+        return fullPath;
+      }
+    }
+
+    return "";
   }
 
   private getAllowRisky(): boolean {
