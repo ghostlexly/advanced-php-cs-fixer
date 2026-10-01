@@ -78,6 +78,13 @@ export class PhpCsFixerRunner {
     return allowRisky;
   }
 
+  private getDiagnosticSeverity(): "error" | "warning" {
+    return this.config.get<"error" | "warning">(
+      "diagnosticSeverity",
+      "warning"
+    );
+  }
+
   private buildCommand(filePath: string, dryRun: boolean = false): string {
     const executable = this.getExecutablePath();
     const configPath = this.getConfigPath();
@@ -194,6 +201,7 @@ export class PhpCsFixerRunner {
     const lines = diff.split("\n");
     let currentLine = 0;
 
+    const severity = this.getDiagnosticSeverity();
     const rulesText =
       appliedFixers.length > 0 ? appliedFixers.join(", ") : "code_style";
 
@@ -214,7 +222,7 @@ export class PhpCsFixerRunner {
           line: currentLine,
           column: 0,
           message,
-          severity: "warning",
+          severity,
           rule,
         });
       }
