@@ -46,6 +46,15 @@
           "default": true,
           "description": "Enable diagnostics (error/warning display)"
         },
+        "advancedPhpCsFixer.diagnosticSeverity": {
+          "type": "string",
+          "enum": [
+            "warning",
+            "error"
+          ],
+          "default": "warning",
+          "description": "Severity level for php-cs-fixer diagnostics"
+        },
         "advancedPhpCsFixer.enableFormatting": {
           "type": "boolean",
           "default": true,
