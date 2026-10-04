@@ -37,8 +37,15 @@ export class PhpCsFixerRunner {
       "executablePath",
       "php-cs-fixer"
     );
+    const workspaceFolders = vscode.workspace.workspaceFolders;
 
-    return executablePath;
+    if (!workspaceFolders || workspaceFolders.length === 0) {
+      return executablePath;
+    }
+
+    const workspaceFolder = workspaceFolders[0].uri.fsPath;
+
+    return executablePath.replace(/\$\{workspaceFolder\}/g, () => `"${workspaceFolder}"`);
   }
 
   private getConfigPath(): string {
