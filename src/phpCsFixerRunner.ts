@@ -59,7 +59,7 @@ export class PhpCsFixerRunner {
     const workspaceFolder = workspaceFolders[0].uri.fsPath;
 
     if (configPath) {
-      return configPath.replace(/\$\{workspaceFolder\}/g, () => `"${workspaceFolder}"`);
+      return configPath.replace(/\$\{workspaceFolder\}/g, workspaceFolder);
     }
 
     const configFiles = [
